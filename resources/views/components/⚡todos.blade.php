@@ -1,39 +1,17 @@
 <?php
-
 use Livewire\Component;
+use Livewire\Attributes\Title;
 
 new class extends Component {
+    #[Title('todos22')]
     public $todo = '';
-
     public $pushtodo = '';
-
-    public $todos = [];
+    public $todos = ['test', 'test2'];
 
     public function add()
     {
-        if ($this->todo != '') {
-            $this->todos[] = $this->todo;
-            $this->reset('todo');
-        }
-    }
-
-    public function mount() {
-        $this->todos = [
-            'Take out trash', 'Do dishes',
-        ];
-    }
-
-    public function updated($property, $value)
-    {
-        $this->$property = strtoupper($value);
-
-        $this->validate();
-    }
-
-    public function push()
-    {
-        //$todos->push('New Task'); // 這是 Laravel 寫好的方法
-        $this->todos = collect($this->todos)->push($this->pushtodo)->all();
+        $this->todos[] = $this->todo;
+        $this->reset('todo');
     }
 
     public function resetArray()
@@ -41,7 +19,6 @@ new class extends Component {
         $this->reset('todos');
     }
 };
-
 ?>
 
 <div>
@@ -50,14 +27,6 @@ new class extends Component {
         <span>Current todo: {{ $todo }}</span>
         <button type="submit">Add</button>
     </form>
-    <br />
-
-    <input type="text" wire:model.live.blur="pushtodo">
-    <span>Current todo: {{ $pushtodo }}</span>
-    <button type="button" wire:click="push">PUSH</button>
-
-    <br />
-    <button type="button" wire:click="resetArray">resetArray</button>
 
     <ul>
         @foreach ($todos as $todo)

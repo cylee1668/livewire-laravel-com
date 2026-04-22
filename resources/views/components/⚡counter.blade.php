@@ -1,9 +1,10 @@
 <?php
 
 use Livewire\Component;
-
+use Livewire\Attributes\Title;
 new class extends Component
 {
+    #[Title('Counter!!')]
     public $count = 1;
 
     public function increment()
