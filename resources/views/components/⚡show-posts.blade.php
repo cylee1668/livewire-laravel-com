@@ -1,14 +1,25 @@
 <?php
-
+use App\Models\Post;
 use Livewire\Component;
 
-new class extends Component
-{
-    public function render()
+new class extends Component {
+    // public function render()
+    // {
+    //     return view('show-posts',[
+    //         'posts' => Post::all(),
+    //     ]);
+    // }
+    public $posts = [];
+
+    public function mount()
     {
-        return view('show-posts',[
-            'posts' => Post::all(),
-        ]);
+        $this->posts = Post::all();
+    }
+
+
+    public function delete()
+    {
+
     }
 };
 ?>
@@ -21,13 +32,20 @@ new class extends Component
             <tr>
                 <th>Title</th>
                 <th>Content</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>Post title</td>
-                <td>Post content</td>
-            </tr>
+            @foreach ($posts as $post)
+                <tr wire:key="{{ $post->id }}">
+                    <td>{{ $post->title }}</td>
+                    <td>{{ str($post->content)->words(8) }}</td>
+                    <td>
+                        <button type="button" wire:click="delete({{ $post->id }})">Delete</button>
+                        <a href="#">Delete</a>
+                    </td>
+                </tr>
+            @endforeach
         </tbody>
     </table>
 </div>
