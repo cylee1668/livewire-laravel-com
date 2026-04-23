@@ -12,4 +12,5 @@ use Illuminate\Support\Facades\Route;
 
 Route::livewire('/','todos');
 Route::livewire('/counter', 'counter');
-Route::livewire('/show-post','show-posts');
+Route::livewire('/show-posts','show-posts');
+Route::livewire('/create-post','create-post');

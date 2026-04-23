@@ -17,9 +17,11 @@ new class extends Component {
     }
 
 
-    public function delete()
-    {
 
+
+    public function delete(Post $post)
+    {
+        $post->delete();
     }
 };
 ?>
@@ -41,8 +43,11 @@ new class extends Component {
                     <td>{{ $post->title }}</td>
                     <td>{{ str($post->content)->words(8) }}</td>
                     <td>
-                        <button type="button" wire:click="delete({{ $post->id }})">Delete</button>
-                        <a href="#">Delete</a>
+                        <button type="button"
+                        wire:click="delete({{ $post->id }})"
+                        wire:confirm="Are you sure you want to delete"
+                        >Delete</button>
+
                     </td>
                 </tr>
             @endforeach
